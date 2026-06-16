@@ -238,6 +238,25 @@ to delete the topic and recreate it.
 
 </details>
 
+## Technical Modification
+
+The modification for this project can be found at src\streaming\kafka_consumer_miller.py
+
+Two small changes include a change to the kafka topic as well as the number of messages sent.
+
+The new topic is 'streaming-06-scenarios-miller' and the number of messages sent is now ten.
+
+As for the bulk of the modification, changes were made to the live chart.
+
+The live chart was a line chart that displayed the total sales by message.
+
+This has been updated into a bar chart that displays the total sales by payment method.
+
+I found this to be a useful change as now we can see what payment methods are being utilized
+the most and which are used the least.
+
+This can lead to more business insights, and the output chart can be found in the data\output folder.
+
 ## Notes
 
 - Use the **UP ARROW** and **DOWN ARROW** in the terminal to scroll through past commands.
