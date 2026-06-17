@@ -43,8 +43,8 @@ from datafun_toolkit.logger import get_logger, log_header, log_path
 from dotenv import load_dotenv
 
 from streaming.core.utils import log_env_vars
-from streaming.data_engineering.derived_fields import enrich_message
-from streaming.data_validation.data_contract_case import (
+from streaming.data_engineering.derived_fields_miller import enrich_message
+from streaming.data_validation.data_contract_miller import (
     CONSUMED_FIELDNAMES,
     SALES_REQUIRED_FIELDS,
     validate_required_fields,
@@ -80,7 +80,7 @@ OUTPUT_DIR: Final[Path] = DATA_DIR / "output"
 
 OUTPUT_CSV: Final[Path] = OUTPUT_DIR / "consumed_sales_miller.csv"
 OUTPUT_DB: Final[Path] = OUTPUT_DIR / "sales_miller.duckdb"
-OUTPUT_CHART: Final[Path] = OUTPUT_DIR / "sales_chart_modified_miller.png"
+OUTPUT_CHART: Final[Path] = OUTPUT_DIR / "sales_chart_final_miller.png"
 
 REGIONS_CSV: Final[Path] = DATA_DIR / "regions.csv"
 PRODUCTS_CSV: Final[Path] = DATA_DIR / "products.csv"
