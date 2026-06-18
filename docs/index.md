@@ -23,55 +23,113 @@ to get these projects running on your machine.
 
 ### Dataset
 
-Describe the dataset used by your Kafka producer.
+The Kafka producer uses the sales.csv dataset in the data folder.
 
-Include:
+The dataset contains records of purchases, with each record containing the info:
 
-- the name of the dataset file
-- what kind of records it contains
-- which fields are included in each record
-- whether you used the original sales dataset or modified it
+- order_id
+- datetime
+- region_id
+- currency_code
+- product_id
+- unit_price
+- quantity
+- is_online
+- customer_id
+- is_new_customer
+- device_type
+- payment_method
+- referral_source
+- discount_code
+- customer_note
+
+For this project, the original sales dataset was used.
+Nothing was modified.
 
 ### Kafka Messages
 
-Describe the messages sent through Kafka.
+The script kafka_producer_case.py in the src/streaming folder
+was used to send messages.
 
-Include:
+Each message sent is a row from the sales dataset.
 
-- what your producer sends
-- which Kafka topic you used
-- what message key you used, if any
-- whether you changed the message fields
+The Kafka topic used was streaming-06-scenarios-miller.
+
+The region_id field was used as the message key.
+
+The message fields were not altered by the producer.
+
+The consumer adds derived fields to each message.
 
 ### Consumer Processing
 
-Describe what your consumer receives and does with each message.
+The consumer reads one message at a time from Kafka.  In this case,
+a total of fifteen messages were read.
 
-Include:
+Each message is logged as it is read and validated by the consumer.
 
-- what your consumer receives from Kafka
-- how many messages it consumes
-- what it logs or prints
-- if it writes records to a CSV file
-- if it processes or filters selected fields (be specific)
+After validation, new fields are calculated and running statistics of each
+message is kept and logged.
+
+Most original message fields are kept along with the newly added derived fields
+and are written to a CSV and DuckDB file.
+
+A live chart was also updated through the consumer as each message was processed.
+
+For this project, the following fields were processed:
+
+- quantity
+- unit_price
+- region_id
+- payment_method
+
+Each derived field came from these four original fields.
 
 ### Experiments
 
-Describe the small technical changes you made.
+In Phase 4, the Kafka topic was changed to streaming-06-scenarios-miller, the number of
+messages was increased to ten, and the live chart was updated to a bar chart that shows
+total sales by payment method.
 
-Include at least one Phase 4 change and one Phase 5 application.
+In Phase 5, the number of messages was increased to fifteen and a new derived field was added.
+
+The field 'payment_channel' was added so that the output CSV file would have the fields
+total, is_new_customer, and payment_channel next to each other.
+
+This way you'd be able to see any relationships between new or not new customers that deal with
+the amount they spend and how they chose to pay.  The payment channels are wallet (digital wallet
+like apple pay), direct (credit/debit cards or cash), and prepaid (gift cards).
 
 ### Results
 
-Describe what happened when you ran the producer and consumer.
+The producer successfully ran and sent all fifteen messages.
+
+The consumer also successfully ran and processed those messages by validating them, updating the
+live chart and adding the derived fields.
+
+The output files as well as the chart can be found in the data\output folder.
+
+As for the running statistics, those can be found in the project's logs.
 
 ### Interpretation
 
-Explain what the Kafka streaming workflow showed you.
+Compared to the original example, this updated version processes 5x more messages, adds a new derived
+field, and uses a bar chart instead of a line chart.
 
-Include:
+As noted under Experiments, by having total, is_new_customer, and payment_channel next to each other
+in the output file, I hope that this can possibly give way to a relationship between the three.
+As of right now, there are no new customers, so only a relationship between total and payment_channel
+would be viable.
 
-- what changed from the original example
-- what you learned from watching messages move through Kafka
-- what the stream could tell a business or organization
-- what business intelligence was gained from the consumed messages
+The consumer is, however, ready for real data where there are new customers.  I'd still say that
+this project was a success.
+
+A business would find the visuals of the live chart very helpful at seeing how customers are choosing
+to pay.  This would allow them to make the most popular payment type easier for people to use, or look
+at the less popular methods and try to understand why they are less popular.
+
+Similarly, businesses would also be able to find any possible relationships from the output CSV
+file, thanks to the addition of the derived fields.
+
+This project helped me understand how an entire streaming pipeline should work.  Putting everything
+into one project was necessary for me to fully grasp how they work.
