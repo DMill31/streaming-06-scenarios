@@ -166,6 +166,9 @@ For full instructions see
 The topic name must match the name defined in your
 `.env` file (copy `.env.example` to `.env`).
 
+In the .env file, change PRODUCER_MESSAGE_COUNT 
+to 15.
+
 Open another VS Code terminal. Rename it `topics`.
 If running Windows, specify the terminal type as **wsl** or
 type `wsl`.
@@ -178,7 +181,7 @@ bin/kafka-topics.sh --create \
   --bootstrap-server localhost:9092 \
   --partitions 1 \
   --replication-factor 1 \
-  --topic streaming-06-scenarios-case
+  --topic streaming-06-scenarios-miller
 ```
 
 ### In VS Code Terminal 3: Run Project and Producer (producer)
