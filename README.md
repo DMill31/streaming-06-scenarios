@@ -166,7 +166,7 @@ For full instructions see
 The topic name must match the name defined in your
 `.env` file (copy `.env.example` to `.env`).
 
-In the .env file, change PRODUCER_MESSAGE_COUNT 
+In the .env file, change PRODUCER_MESSAGE_COUNT
 to 15.
 
 Open another VS Code terminal. Rename it `topics`.
